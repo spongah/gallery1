@@ -22,5 +22,7 @@
   <%= @gallery.name %>
 </p>
 
-<%= link_to 'Edit', edit_gallery_image_path(@gallery, @image) %> |
-<%= link_to 'Back', gallery_path(@gallery) %>
+<% if admin? %>
+	<%= link_to 'Edit', edit_gallery_image_path(@gallery, @image) %> |
+<% end %>
+<%= link_to 'Back to Gallery', gallery_path(@gallery) %>

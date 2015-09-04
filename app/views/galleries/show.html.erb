@@ -20,34 +20,37 @@
         <td>Image Description: <%= image.description %></td><br>
         <td>Gallery Name: <%= @gallery.name %></td><br>
         <td><%= link_to (image_tag image.filename.url(:thumb).to_s), gallery_image_path(@gallery, image) %></td><br>
-        <td><%= link_to 'Show', gallery_image_path(@gallery, image) %></td>
-        <td><%= link_to 'Edit', edit_gallery_image_path(@gallery, image) %></td>
-        <td><%= link_to 'Destroy', gallery_image_path(@gallery, image), method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
+        <% if admin? %>
+          <td><%= link_to 'Show', gallery_image_path(@gallery, image) %></td>
+          <td><%= link_to 'Edit', edit_gallery_image_path(@gallery, image) %></td>
+          <td><%= link_to 'Destroy', gallery_image_path(@gallery, image), method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
+        <% end %>
       </tr><br><br>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= form_for([@gallery, @gallery.images.build]) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+<% if admin? %>
+  <%= form_for([@gallery, @gallery.images.build]) do |f| %>
     <div class="field">
-    <%= f.label :filename %><br>
-    <%= f.file_field :filename %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+      <div class="field">
+      <%= f.label :filename %><br>
+      <%= f.file_field :filename %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+
+  <%= link_to 'Edit Gallery', edit_gallery_path(@gallery) %> |
 <% end %>
-
-
-<%= link_to 'Edit Gallery', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back To Galleries', galleries_path %>

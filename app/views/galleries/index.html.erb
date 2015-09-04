@@ -6,12 +6,23 @@
 
         Name: <%= gallery.name %><br>
         Description: <%= gallery.description %><br>
+        User:
+        <% if gallery.user != nil %>
+          <%= gallery.user.email.to_s %><br>
+        <% else %>
+          No user assigned
+        <% end %>
+        <br>
         <%= link_to (image_tag gallery.galleryimage.url(:thumbsm).to_s), gallery %><br>
-        <%= link_to 'Edit', edit_gallery_path(gallery) %>
-        <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <br><br><br>
+        <% if admin? %>
+          <%= link_to 'Edit', edit_gallery_path(gallery) %>
+          <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+        <% end %>
+        <br><br>
     <% end %>
 
 <br>
 
-<%= link_to 'New Gallery', new_gallery_path %>
+<% if admin? %>
+  <%= link_to 'New Gallery', new_gallery_path %>
+<% end %>

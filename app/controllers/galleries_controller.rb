@@ -26,6 +26,7 @@ class GalleriesController < ApplicationController
   # POST /galleries.json
   def create
     @gallery = Gallery.new(gallery_params)
+    @gallery.user = current_user
 
     respond_to do |format|
       if @gallery.save
