@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def admin?
   	if current_user != nil
-  		current_user.email = "rocksolid801@gmail.com"
-  	end
+  		current_user.email == "rocksolid801@gmail.com"
+   	end
   end
 end

@@ -12,6 +12,7 @@
 	<p class="alert"><%= alert %></p>
 
 	<% if user_signed_in? %>
+		Signed in as: <%= current_user.email %><br>
 		<%= link_to "Sign Out", destroy_user_session_path, method: "delete" %>
 	<% else %>
 		<%= link_to "Sign in", new_user_session_path %>
