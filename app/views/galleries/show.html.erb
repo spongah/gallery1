@@ -19,7 +19,7 @@
         <td>Filename: <%= image.filename %></td><br><br>
         <td>Image Description: <%= image.description %></td><br>
         <td>Gallery Name: <%= @gallery.name %></td><br>
-        <td><%= image_tag image.filename.url(:thumb).to_s %></td><br>
+        <td><%= link_to (image_tag image.filename.url(:thumb).to_s), gallery_image_path(@gallery, image) %></td><br>
         <td><%= link_to 'Show', gallery_image_path(@gallery, image) %></td>
         <td><%= link_to 'Edit', edit_gallery_image_path(@gallery, image) %></td>
         <td><%= link_to 'Destroy', gallery_image_path(@gallery, image), method: :delete, data: { confirm: 'Are you sure?' } %></td><br>
